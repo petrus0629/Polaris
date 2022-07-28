@@ -1,0 +1,7 @@
+name: Bank
+version: '${project.version}'
+main: bank.bank.Bank
+
+commands:
+  현금발행:
+  cl:

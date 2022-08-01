@@ -4,4 +4,5 @@ main: bank.bank.Bank
 
 commands:
   현금발행:
+  이름조회:
   cl:

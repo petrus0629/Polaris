@@ -2,7 +2,7 @@
   <artifact type="jar" name="Banker">
     <output-path>$USER_HOME$/Develop Server Practice/plugins</output-path>
     <root id="archive" name="Banker.jar">
-      <element id="module-output" name="poalrisBank" />
+      <element id="module-output" name="polarisBank" />
       <element id="dir-copy" path="$PROJECT_DIR$/../playerLocation/src/main/resources" />
     </root>
   </artifact>

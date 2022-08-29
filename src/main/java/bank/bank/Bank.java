@@ -18,6 +18,7 @@ public class Bank extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+        /* Vault 플러그인 연동 구문 */
         if (!setupEconomy()) {
             getServer().getPluginManager().disablePlugin(this);
             return;
@@ -28,9 +29,10 @@ public class Bank extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(this, this);
         this.getCommand("cl").setExecutor(new ChatClear(this));
-        this.getCommand("현금발행").setExecutor(new Money(this));
+        this.getCommand("현금발행").setExecutor(new MoneyMaker(this));
 
     }
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -42,6 +44,8 @@ public class Bank extends JavaPlugin implements Listener {
 
         return true;
     }
+
+    // Vault API를 이용한 구문
     private static Economy econ = null;
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {

@@ -15,9 +15,9 @@ import java.util.Arrays;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class Money implements CommandExecutor {
+public class MoneyMaker implements CommandExecutor {
     Bank plugin;
-    public Money(Bank passedPlugin)
+    public MoneyMaker(Bank passedPlugin)
     {
         this.plugin = passedPlugin;
     }
@@ -49,6 +49,8 @@ public class Money implements CommandExecutor {
                 sender.sendMessage("=========================================================================");
             }
         }
+
+        // 커맨드를 실행 했을 때 생기는 잡시리한 경고문을 없애주는 예외처리
         int money = 0;
         int num = 0;
         Player p = (Player) sender;
@@ -59,19 +61,22 @@ public class Money implements CommandExecutor {
             p.sendMessage("");
             return true;
         }
+
+        /* 커스텀 아이템 */
         ItemStack paper = new ItemStack(Material.PAPER);
         ItemMeta meta = paper.getItemMeta();
         meta.setDisplayName("[지폐] : "+ args[0] + "원");
         meta.setLore(Arrays.asList(ChatColor.WHITE+args[0]+"원 입니다.", "발행기관 : 폴라리스 중앙은행", ChatColor.BOLD + "화폐위조는 중범죄 입니다."));
         paper.setItemMeta(meta);
 
+        /* 수량에 맞게 입력된 현금을 통장에 보관하는 커맨드 */
         for (int i = 0; i < num; i++) {
             p.getInventory().addItem(paper);
         }
         econ.depositPlayer(p, money);
         p.sendMessage("====================");
         p.sendMessage("돈이 추가되었습니다.");
-        p.sendMessage(ChatColor.YELLOW+"현재 잔고 : "+ econ.getBalance(p));
+        p.sendMessage(ChatColor.YELLOW+"현재 잔고 : "+ econ.getBalance(p)); // econ.getBalance는 플레이어의 잔액을 표시한다.
         p.sendMessage("====================");
         return false;
     }

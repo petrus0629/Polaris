@@ -42,14 +42,55 @@ public class MoneyMaker implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("현금발행")) {
             if (args.length != 2) {
                 sender.sendMessage("=========================================================================");
-                sender.sendMessage(ChatColor.BOLD + "<!현금 플러그인 사용법!>");
+                sender.sendMessage(ChatColor.BOLD + "<! 현금발행 방법 !>");
                 sender.sendMessage("");
-                sender.sendMessage(ChatColor.BOLD+ "주의 : 이 플러그인은 금융업에 종사하는 플레이어만 사용 가능합니다.");
+                sender.sendMessage(ChatColor.BOLD+ "주의 : 이 시스템은 금융업에 종사하는 플레이어만 사용 가능합니다.");
                 sender.sendMessage("사용예시 : /현금발행 <발행할 금액> <발행할 수량>");
                 sender.sendMessage("=========================================================================");
+
+                // 커맨드를 실행 했을 때 생기는 잡시리한 경고문을 없애주는 예외처리
+                int money = 0;
+                int num = 0;
+                Player p = (Player) sender;
+                try {
+                    money = Integer.parseInt(args[0]);
+                    num = Integer.parseInt(args[1]);
+                } catch (Exception e) {
+                    p.sendMessage("");
+                    return true;
+                }
+
+                /* 커스텀 아이템 */
+                ItemStack paper = new ItemStack(Material.PAPER);
+                ItemMeta meta = paper.getItemMeta();
+                meta.setDisplayName("[지폐] : "+ args[0] + "원");
+                meta.setLore(Arrays.asList(ChatColor.WHITE+args[0]+"원 입니다.", "발행기관 : 폴라리스 중앙은행", ChatColor.BOLD + "화폐위조는 중범죄 입니다."));
+                paper.setItemMeta(meta);
+
+                /* 수량에 맞게 입력된 현금을 통장에 보관하는 커맨드 */
+                for (int i = 0; i < num; i++) {
+                    p.getInventory().addItem(paper);
+                }
+                econ.depositPlayer(p, money);
+                p.sendMessage("====================");
+                p.sendMessage("돈이 추가되었습니다.");
+                p.sendMessage(ChatColor.YELLOW+"현재 잔고 : "+ econ.getBalance(p)); // econ.getBalance는 플레이어의 잔액을 표시한다.
+                p.sendMessage("====================");
             }
         }
 
+        /* 발행된 현금을 삭제하는 커맨드 */
+        if(command.getName().equalsIgnoreCase("현금삭제")){
+            if(args.length != 2){
+                sender.sendMessage("=========================================================================");
+                sender.sendMessage(ChatColor.BOLD + "<! 현금삭제 방법 !>");
+                sender.sendMessage("");
+                sender.sendMessage(ChatColor.BOLD+ "주의 : 이 시스템은 금융업에 종사하는 플레이어만 사용 가능합니다.");
+                sender.sendMessage("사용예시 : /현금삭제 <삭제할 금액> <삭제할 수량>");
+                sender.sendMessage("=========================================================================");
+            }
+        }
+/*
         // 커맨드를 실행 했을 때 생기는 잡시리한 경고문을 없애주는 예외처리
         int money = 0;
         int num = 0;
@@ -62,14 +103,18 @@ public class MoneyMaker implements CommandExecutor {
             return true;
         }
 
-        /* 커스텀 아이템 */
+        */
+/* 커스텀 아이템 *//*
+
         ItemStack paper = new ItemStack(Material.PAPER);
         ItemMeta meta = paper.getItemMeta();
         meta.setDisplayName("[지폐] : "+ args[0] + "원");
         meta.setLore(Arrays.asList(ChatColor.WHITE+args[0]+"원 입니다.", "발행기관 : 폴라리스 중앙은행", ChatColor.BOLD + "화폐위조는 중범죄 입니다."));
         paper.setItemMeta(meta);
 
-        /* 수량에 맞게 입력된 현금을 통장에 보관하는 커맨드 */
+        */
+/* 수량에 맞게 입력된 현금을 통장에 보관하는 커맨드 *//*
+
         for (int i = 0; i < num; i++) {
             p.getInventory().addItem(paper);
         }
@@ -78,6 +123,8 @@ public class MoneyMaker implements CommandExecutor {
         p.sendMessage("돈이 추가되었습니다.");
         p.sendMessage(ChatColor.YELLOW+"현재 잔고 : "+ econ.getBalance(p)); // econ.getBalance는 플레이어의 잔액을 표시한다.
         p.sendMessage("====================");
+*/
+
         return false;
     }
 }

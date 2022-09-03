@@ -10,6 +10,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static sun.audio.AudioPlayer.player;
+import static sun.print.CUPSPrinter.getServer;
 
 
 public class Bank extends JavaPlugin implements Listener {

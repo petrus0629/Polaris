@@ -98,13 +98,6 @@ public class MoneyMaker implements CommandExecutor {
                     return true;
                 }
 
-                // 커스텀 아이템
-                ItemStack paper = new ItemStack(Material.PAPER);
-                ItemMeta meta = paper.getItemMeta();
-                meta.setDisplayName("[지폐] : " + args[0] + "원");
-                meta.setLore(Arrays.asList(ChatColor.WHITE + args[0] + "원 입니다.", "발행기관 : 폴라리스 중앙은행", ChatColor.BOLD + "화폐위조는 중범죄 입니다."));
-                paper.setItemMeta(meta);
-
                 // 수량에 맞게 입력된 현금을 통장에 보관하는 커맨드
                 for (int i = 0; i < num; i--) {
                     p.getInventory().addItem(paper);

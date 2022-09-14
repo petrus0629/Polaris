@@ -29,8 +29,7 @@ public class Bank extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(this, this);
         this.getCommand("cl").setExecutor(new ChatClear(this));
-        this.getCommand("현금발행").setExecutor(new MoneyMaker(this));
-        this.getCommand("현금삭제").setExecutor(new MoneyMaker(this));
+        this.getCommand("현금").setExecutor(new Money(this));
     }
 
 

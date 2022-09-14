@@ -3,7 +3,7 @@ version: '1.0-SNAPSHOT'
 main: bank.bank.Bank
 
 commands:
-  현금발행:
-  현금삭제:
-  이름조회:
+  현금:
+    발행:
+      삭제:
   cl:
